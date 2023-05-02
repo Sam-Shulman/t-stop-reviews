@@ -22,22 +22,22 @@ const StationIndex = props => {
         getStations()
     }, [])
 
-const stationIndexItems = stations.map(stationItem => {
+    const stationIndexItems = stations.map(stationItem => {
+        return (
+            <div>
+                <p>{stationItem.name}</p>
+                <p>{stationItem.line}</p>
+                <p>{stationItem.location}</p>
+            </div>
+        )
+    })
+
     return (
         <div>
-           <h1>{stationItem.name}</h1>
-           <h1>{stationItem.line}</h1>
-           <h1>{stationItem.location}</h1>
+            <h1>Boston T Stations</h1>
+            <ul>{stationIndexItems}</ul>
         </div>
     )
-})
-
-return (
-    <div>
-        <h1> {stationIndexItems} </h1>
-        <h1> Boston T Stations </h1>
-    </div>
-)
 }
 
 
