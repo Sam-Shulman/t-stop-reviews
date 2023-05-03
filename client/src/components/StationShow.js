@@ -31,12 +31,12 @@ const StationShow = props => {
     }, [])
 
     return (
-        <div>
+        <>
             <h1>{station.name}</h1>
             <h3>{station.line}</h3>
             <h3>{station.location}</h3>
             <h3>{station.reviews}</h3>
-        </div>
+        </>
     )
 }
 
