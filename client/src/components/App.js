@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
+
 import StationIndex from "./StationsIndex";
+import StationShow from "./StationShow";
 
 import getCurrentUser from "../services/getCurrentUser";
 import "../assets/scss/main.scss";
@@ -31,6 +33,9 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={StationIndex}/>
         <Route exact path="/stations/new" component={newStationForm}/>
+        <Redirect exact from="/" to="/stations"/>
+        <Route exact path="/stations" component={StationIndex} />
+        <Route exact path="/stations/:id" component={StationShow} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>
