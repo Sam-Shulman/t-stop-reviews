@@ -31,7 +31,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={StationIndex}>
         </Route>
-        <Route exact path="/add-station" component={newStationForm}/>
+        <Route exact path="/stations/new" component={newStationForm}/>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>
