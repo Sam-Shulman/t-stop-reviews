@@ -30,12 +30,44 @@ const StationShow = props => {
         getStation()
     }, [])
 
+
+    const showReviews = station.reviews.map(review => {
+        let hasPolicePresenceSection, hasSittingWaterSection, storySection
+
+        if (review.hasPolicePresence === true) {
+            hasPolicePresenceSection = <p>There was a police presence.</p>
+        } else if (review.hasPolicePresence === false) {
+            hasPolicePresenceSection = <p>There was not a police presence!</p>
+        }
+
+        if (review.hasSittingWater === true) {
+            hasSittingWaterSection = <p>There was random sitting water.</p>
+        } else if (review.hasSittingWater === false) {
+            hasSittingWaterSection = <p>There was not random sitting water!</p>
+        }
+
+        if (review.story) {
+            storySection = <p>Story: {review.story}</p>
+        }
+        return (
+            <div key={review.id}>
+                <h4>Name: {review.name}</h4>
+                <p>Rating: {review.rating}</p>
+                {hasPolicePresenceSection}
+                {hasSittingWaterSection}
+                {storySection}
+            </div>
+        )
+    })
+    
+
     return (
         <>
             <h1>{station.name}</h1>
             <h3>{station.line}</h3>
             <h3>{station.location}</h3>
-            <h3>{station.reviews}</h3>
+            <h3>Reviews for this Station: </h3>
+            {showReviews}
         </>
     )
 }

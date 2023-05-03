@@ -5,6 +5,7 @@ class StationSerializer {
         for (const attribute of allowedAttributes) {
             serializedStation[attribute] = station[attribute]
         }
+        serializedStation.reviews = await station.$relatedQuery("reviews")
         return serializedStation
     }
 }
