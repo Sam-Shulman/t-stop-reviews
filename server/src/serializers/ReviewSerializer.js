@@ -1,5 +1,6 @@
 class ReviewSerializer {
-    static async getSummary(review) {
+    static getSummary(review) {
+        console.log(review)
         const allowedAttributes = ["id", "name", "rating", "hasPolicePresence", "hasSittingWater", "story", "stationId"]
         let serializedReview = {}
         for (const attribute of allowedAttributes) {

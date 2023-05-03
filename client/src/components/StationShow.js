@@ -20,6 +20,7 @@ const StationShow = props => {
                 throw error
               }
             const body = await response.json()
+            debugger
             setStation(body.station)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
@@ -30,25 +31,25 @@ const StationShow = props => {
         getStation()
     }, [])
 
-
     const showReviews = station.reviews.map(review => {
         let hasPolicePresenceSection, hasSittingWaterSection, storySection
 
         if (review.hasPolicePresence === true) {
             hasPolicePresenceSection = <p>There was a police presence.</p>
-        } else if (review.hasPolicePresence === false) {
+        } else {
             hasPolicePresenceSection = <p>There was not a police presence!</p>
         }
 
         if (review.hasSittingWater === true) {
             hasSittingWaterSection = <p>There was random sitting water.</p>
-        } else if (review.hasSittingWater === false) {
+        } else {
             hasSittingWaterSection = <p>There was not random sitting water!</p>
         }
 
         if (review.story) {
             storySection = <p>Story: {review.story}</p>
         }
+
         return (
             <div key={review.id}>
                 <h4>Name: {review.name}</h4>
