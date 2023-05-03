@@ -58,7 +58,7 @@ if (shouldRedirect) {
 }
 
 return (
-    <div>
+    <>
     <h1> Add A New Station </h1>
     <form onSubmit={handleSubmit}/>
         <label>
@@ -108,8 +108,7 @@ return (
     <div className="button-group">
         <input className="button" type="submit" value={"Submit"} />
     </div>
-
-    </div>
+    </>
 )
 }
 
