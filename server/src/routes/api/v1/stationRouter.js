@@ -12,4 +12,14 @@ stationRouter.get("/", async (req, res) => {
     }
 })
 
+stationRouter.get("/:id", async (req, res) => {
+    const { id } = req.params
+    try {
+        const showStation = await Station.query().findById(id)
+        return res.status(200).json({ station: showStation })
+    } catch (err) {
+        return res.status(500).json({ errors: err })
+    }
+})
+
 export default stationRouter
