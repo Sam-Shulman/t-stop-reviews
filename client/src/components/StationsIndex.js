@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import { Link } from "react-router-dom";
 
 const StationIndex = props => {
     const [stations, setStations] = useState([])
@@ -24,11 +25,11 @@ const StationIndex = props => {
 
     const stationIndexItems = stations.map(stationItem => {
         return (
-            <div>
-                <p>{stationItem.name}</p>
-                <p>{stationItem.line}</p>
-                <p>{stationItem.location}</p>
-            </div>
+            <li key={stationItem.id}>
+                <Link to={`/stations/${stationItem.id}`}>
+                    {stationItem.name}
+                </Link>
+            </li>
         )
     })
 
