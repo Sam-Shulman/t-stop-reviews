@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import ReviewTile from "./ReviewTile.js"
 
 const StationShow = props => {
 
@@ -30,12 +31,17 @@ const StationShow = props => {
         getStation()
     }, [])
 
-    return (
+    const reviewTiles = station.reviews.map((reviewObject)=> {
+        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+    })
+    
+        return (
         <>
             <h1>{station.name}</h1>
             <h3>{station.line}</h3>
             <h3>{station.location}</h3>
-            <h3>{station.reviews}</h3>
+            <h3>Reviews for this Station: </h3>
+            {reviewTiles}
         </>
     )
 }
