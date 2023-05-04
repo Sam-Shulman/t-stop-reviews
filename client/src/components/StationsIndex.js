@@ -33,8 +33,6 @@ const StationIndex = props => {
         )
     })
 
-    console.log(stationIndexItems)
-
     return (
         <div>
             <h1>Boston T Stations</h1>
