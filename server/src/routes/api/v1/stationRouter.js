@@ -1,6 +1,7 @@
 import express from "express"
 import { Station } from "../../../models/index.js"
 import StationSerializer from "../../../serializers/StationSerializer.js"
+import uploadImage from "../../../services/uploadImage.js"
 
 const stationRouter = new express.Router()
 
@@ -26,6 +27,21 @@ stationRouter.get("/:id", async (req, res) => {
         return res.status(200).json({ station: serializedStation })
     } catch (err) {
         return res.status(500).json({ errors: err })
+    }
+})
+
+stationRouter.post("/", uploadImage.single("image"), async (req, res) => {
+    try {
+        const { body } = req
+        const data = {
+            ...body,
+            image: req.file.location,
+        }
+        console.log(req.file.location)
+        const station = await Station.query().insertAndFetch(data)
+        return res.status(201).json({ station })
+    } catch (error) {
+        return res.status(500).json({ errors: error })
     }
 })
 

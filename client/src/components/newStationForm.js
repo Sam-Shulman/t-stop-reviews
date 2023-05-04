@@ -1,44 +1,59 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import translateServerErrors from "./../services/translateServerErrors"
+import Dropzone from "react-dropzone"
 
 const newStationForm = (props) => {
     const [newStation, setNewStation] = useState ({
         name: "",
         line: "",
         location: "",
-        imgUrl: ""
+        image: ""
     })
     const [errors, setErrors] = useState({})
     const [shouldRedirect, setShouldRedirect] = useState(false)
 
-    const addNewStation = async () => {
-    try {
-        const response = await fetch ("/api/v1/stations" , {
-            method: "POST",
-            headers: new Headers({
-                "Content-Type": "application/json"
-            }),
-            body: JSON.stringify(newStation)
-        })
+    // const [newStationFormData, setNewStationFormData] = useState({})
 
-        if(!response.ok) {
-            if(response.status === 422) {
-                const body = await response.json()
-                const newErrors = translateServerErrors(body.errors)
-                return setErrors(newErrors)
+    const addNewStation = async (event) => {
+        event.preventDefault()
+        const newStationBody = new FormData()
+        newStationBody.append("name", newStation.name)
+        newStationBody.append("line", newStation.line)
+        newStationBody.append("location", newStation.location)
+        newStationBody.append("image", newStation.image)
+
+
+        try {
+            const response = await fetch ("/api/v1/stations" , {
+                method: "POST",
+                headers: new Headers({
+                    "Accept": "image/jpeg"
+                }),
+                body: newStationBody
+            })
+
+            if(!response.ok) {
+                if(response.status === 422) {
+                    const body = await response.json()
+                    const newErrors = translateServerErrors(body.errors)
+                    return setErrors(newErrors)
+                } else {
+                    const errorMessage = `${response.status} ($response.statusText)`
+                    const error = new Error(errorMessage)
+                    throw (error)
+                }
             } else {
-                const errorMessage = `${response.status} ($response.statusText)`
-                const error = new Error(errorMessage)
-                throw (error)
+                const body = await response.json()
+                setNewStation([
+                    ...newStation,
+                    body.station
+                ])
+                setShouldRedirect(true)
             }
-        } else {
-            const body = await response.json()
-            setShouldRedirect(true)
+        } catch (err) {
+        console.error(`Error in fetch: ${err.message}`)
         }
-    } catch (err) {
-    console.error(`Error in fetch: ${err.message}`)
-    }
 }
 
 const handleInputChange = (event) => {
@@ -47,6 +62,13 @@ const handleInputChange = (event) => {
         [event.currentTarget.name]: event.currentTarget.value
     })
 }
+
+const handleImageUpload = (acceptedImage) => {
+    setNewStation({
+      ...newStation,
+      image: acceptedImage[0]
+    })
+  }
 
 const handleSubmit = (event) => {
     event.preventDefault()
@@ -94,16 +116,26 @@ return (
             />
         </label>
         
-        <label>
-            ImgUrl:
+        {/* <label>
+            Image:
         <input 
                 type="img"
-                name="imgUrl"
-                id="imgUrl"
+                name="image"
+                id="image"
                 onChange={handleInputChange}
-                value={newStation.imgUrl}
+                value={newStation.image}
             />
-        </label>
+        </label> */}
+        <Dropzone onDrop={handleImageUpload}>
+            {({getRootProps, getInputProps}) => (
+                <section>
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>Upload Your Image - drag 'n' drop or click to upload</p>
+                    </div>
+                </section>
+            )}
+        </Dropzone>
 
         <div className="button-group">
             <input className="button" type="submit" value="Submit" />
