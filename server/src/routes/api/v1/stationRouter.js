@@ -25,6 +25,7 @@ stationRouter.get("/:id", async (req, res) => {
         const serializedStation = await StationSerializer.getSummary(showStation)
         return res.status(200).json({ station: serializedStation })
     } catch (err) {
+        console.log(err)
         return res.status(500).json({ errors: err })
     }
 })
