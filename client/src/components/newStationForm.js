@@ -9,10 +9,10 @@ const newStationForm = (props) => {
         location: "",
         imgUrl: ""
     })
-const [errors, setErrors] = useState({})
-const [shouldRedirect, setShouldRedirect] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [shouldRedirect, setShouldRedirect] = useState(false)
 
-const addNewStation = async () => {
+    const addNewStation = async () => {
     try {
         const response = await fetch ("/api/v1/stations" , {
             method: "POST",
@@ -64,50 +64,50 @@ return (
         <label>
             Station Name: 
             <input 
-            type="text"
-            name="name"
-            id="name"
-            onChange={handleInputChange}
-            value={newStation.name}
+                type="text"
+                name="name"
+                id="name"
+                onChange={handleInputChange}
+                value={newStation.name}
             />
         </label>
 
         <label>
             Line:
         <input 
-            type="text"
-            name="line"
-            id="line"
-            onChange={handleInputChange}
-            value={newStation.line}
+                type="text"
+                name="line"
+                id="line"
+                onChange={handleInputChange}
+                value={newStation.line}
             />
         </label>
 
         <label>
             Location:
         <input
-            type="text"
-            name="location"
-            id="location"
-            onChange={handleInputChange}
-            value={newStation.location}
+                type="text"
+                name="location"
+                id="location"
+                onChange={handleInputChange}
+                value={newStation.location}
             />
         </label>
         
         <label>
             ImgUrl:
         <input 
-            type="img"
-            name="imgUrl"
-            id="imgUrl"
-            onChange={handleInputChange}
-            value={newStation.imgUrl}
+                type="img"
+                name="imgUrl"
+                id="imgUrl"
+                onChange={handleInputChange}
+                value={newStation.imgUrl}
             />
         </label>
 
-    <div className="button-group">
-        <input className="button" type="submit" value={"Submit"} />
-    </div>
+        <div className="button-group">
+            <input className="button" type="submit" value="Submit" />
+        </div>
     </>
 )
 }

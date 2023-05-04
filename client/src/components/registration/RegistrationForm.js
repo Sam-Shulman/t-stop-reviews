@@ -92,20 +92,21 @@ const RegistrationForm = () => {
   }
 
   return (
-    <div className="grid-container">
-      <h1>Register</h1>
+    <div className="grid-container sign-in-border">
+      <h4 className="top-sign-text">Sign Up</h4>
       <form onSubmit={onSubmit}>
         <div>
-          <label>
+          <label className="center">
             Email
-            <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
+            <input placeholder="Your Email" type="text" name="email" value={userPayload.email} onChange={onInputChange} />
             <FormError error={errors.email} />
           </label>
         </div>
         <div>
-          <label>
+          <label className="center">
             Password
             <input
+              placeholder="Your Password"
               type="password"
               name="password"
               value={userPayload.password}
@@ -115,9 +116,10 @@ const RegistrationForm = () => {
           </label>
         </div>
         <div>
-          <label>
+          <label className="center">
             Password Confirmation
             <input
+              placeholder="Confirm Password"
               type="password"
               name="passwordConfirmation"
               value={userPayload.passwordConfirmation}
@@ -126,8 +128,8 @@ const RegistrationForm = () => {
             <FormError error={errors.passwordConfirmation} />
           </label>
         </div>
-        <div>
-          <input type="submit" className="button" value="Register" />
+        <div className="bot-sign-button">
+          <input type="submit" className="button" value="Sign Up" />
         </div>
       </form>
     </div>
