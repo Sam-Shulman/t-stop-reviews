@@ -21,7 +21,6 @@ const StationShow = props => {
                 throw error
               }
             const body = await response.json()
-            debugger
             setStation(body.station)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
@@ -31,7 +30,7 @@ const StationShow = props => {
     useEffect(() => {
         getStation()
     }, [])
-    
+
     const reviewTiles = station.reviews.map((reviewObject)=> {
         return <ReviewTile key={reviewObject.id} {...reviewObject}/>
     })
