@@ -7,9 +7,8 @@ class StationSerializer {
             serializedStation[attribute] = station[attribute]
         }
         const relatedReviews = await station.$relatedQuery("reviews")
-        const serializedReviews =  await Promise.all(relatedReviews.map(async (review) => 
+        const serializedReviews = relatedReviews.map((review) => 
         ReviewSerializer.getSummary(review))
-        )
         serializedStation.reviews = serializedReviews
         return serializedStation
     }

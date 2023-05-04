@@ -30,13 +30,12 @@ const StationShow = props => {
     useEffect(() => {
         getStation()
     }, [])
-
+    
     const reviewTiles = station.reviews.map((reviewObject)=> {
         return <ReviewTile key={reviewObject.id} {...reviewObject}/>
     })
     
-
-    return (
+        return (
         <>
             <h1>{station.name}</h1>
             <h3>{station.line}</h3>
