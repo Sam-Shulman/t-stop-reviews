@@ -39,7 +39,6 @@ class Review extends Model {
                     to: "users.id"
                 }
             }
-
         }
     }
 }

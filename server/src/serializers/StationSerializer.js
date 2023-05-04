@@ -1,3 +1,4 @@
+import ReviewSerializer from "./ReviewSerializer.js"
 class StationSerializer {
     static async getSummary(station) {
         const allowedAttributes = ["id", "name", "line", "location"]
