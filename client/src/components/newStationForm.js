@@ -58,10 +58,10 @@ if (shouldRedirect) {
 }
 
 return (
-    <>
-    <h1> Add A New Station </h1>
+    <div className="grid-container station-post-border">
+    <h1 className="top-sign-text"> Add A New Station </h1>
     <form onSubmit={handleSubmit}/>
-        <label>
+        <label className="center">
             Station Name: 
             <input 
                 type="text"
@@ -72,7 +72,7 @@ return (
             />
         </label>
 
-        <label>
+        <label className="center">
             Line:
         <input 
                 type="text"
@@ -83,7 +83,7 @@ return (
             />
         </label>
 
-        <label>
+        <label className="center">
             Location:
         <input
                 type="text"
@@ -94,7 +94,7 @@ return (
             />
         </label>
         
-        <label>
+        <label className="center">
             ImgUrl:
         <input 
                 type="img"
@@ -105,10 +105,10 @@ return (
             />
         </label>
 
-        <div className="button-group">
+        <div className="bot-sign-button">
             <input className="button" type="submit" value="Submit" />
         </div>
-    </>
+    </div>
 )
 }
 
