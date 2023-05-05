@@ -44,6 +44,19 @@ class User extends uniqueFunc(Model) {
 
     return serializedJson;
   }
+  static get relationMappings(){
+    const { Review } = require("./index.js")
+    return {
+      reviews: {
+        relation: Model.HasManyRelation,
+        modelClass: Review,
+        join: {
+          from: "users.id",
+          to: "reviews.userId"
+        }
+      }
+    }
+  }
 }
 
 module.exports = User;
