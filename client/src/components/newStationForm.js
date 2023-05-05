@@ -8,13 +8,11 @@ const newStationForm = (props) => {
         name: "",
         line: "",
         location: "",
-        image: ""
+        imgUrl: ""
     })
     const [errors, setErrors] = useState({})
     const [shouldRedirect, setShouldRedirect] = useState(false)
     const [files, setFiles] = useState([])
-
-    // const [newStationFormData, setNewStationFormData] = useState({})
 
     const addNewStation = async (event) => {
         event.preventDefault()
@@ -22,7 +20,7 @@ const newStationForm = (props) => {
         newStationBody.append("name", newStation.name)
         newStationBody.append("line", newStation.line)
         newStationBody.append("location", newStation.location)
-        newStationBody.append("image", newStation.image)
+        newStationBody.append("imgUrl", newStation.imgUrl)
 
         try {
             const response = await fetch ("/api/v1/stations" , {
@@ -54,92 +52,96 @@ const newStationForm = (props) => {
         } catch (err) {
         console.error(`Error in fetch: ${err.message}`)
         }
-}
+    }
 
-const handleInputChange = (event) => {
-    setNewStation({
+    const handleInputChange = (event) => {
+        setNewStation({
+            ...newStation,
+            [event.currentTarget.name]: event.currentTarget.value
+        })
+    }
+
+    const handleImageUpload = (acceptedImage) => {
+        setNewStation({
         ...newStation,
-        [event.currentTarget.name]: event.currentTarget.value
-    })
-}
+        imgUrl: acceptedImage[0]
+        })
+        setFiles([
+            <li key={acceptedImage[0].path}>
+                {acceptedImage[0].path} - {acceptedImage[0].size} bytes
+            </li>
+        ])
+    }
 
-const handleImageUpload = (acceptedImage) => {
-    console.log(acceptedImage)
-    setNewStation({
-      ...newStation,
-      image: acceptedImage[0]
-    })
-    setFiles([
-        <li key={acceptedImage[0].path}>
-            {acceptedImage[0].path} - {acceptedImage[0].size} bytes
-        </li>
-    ])
-  }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        addNewStation()
+    }
 
-const handleSubmit = (event) => {
-    event.preventDefault()
-    addNewStation()
-}
+    if (shouldRedirect) {
+        return <Redirect push to="/" />
+    }
 
-if (shouldRedirect) {
-    return <Redirect push to="/" />
-}
+    return (
+        <>
+        <h1> Add A New Station </h1>
+        <form onSubmit={handleSubmit}/>
+            <label>
+                Station Name: 
+                <input 
+                    type="text"
+                    name="name"
+                    id="name"
+                    onChange={handleInputChange}
+                    value={newStation.name}
+                />
+            </label>
 
-return (
-    <>
-    <h1> Add A New Station </h1>
-    <form onSubmit={handleSubmit}/>
-        <label>
-            Station Name: 
+            <label>
+                Line:
             <input 
-                type="text"
-                name="name"
-                id="name"
-                onChange={handleInputChange}
-                value={newStation.name}
-            />
-        </label>
+                    type="text"
+                    name="line"
+                    id="line"
+                    onChange={handleInputChange}
+                    value={newStation.line}
+                />
+            </label>
 
-        <label>
-            Line:
-        <input 
-                type="text"
-                name="line"
-                id="line"
-                onChange={handleInputChange}
-                value={newStation.line}
-            />
-        </label>
+            <label>
+                Location:
+            <input
+                    type="text"
+                    name="location"
+                    id="location"
+                    onChange={handleInputChange}
+                    value={newStation.location}
+                />
+            </label>
+            
+            <Dropzone 
+                type="image" 
+                name="imgUrl" 
+                id="imgUrl" 
+                onDrop={handleImageUpload} 
+                value={newStation.imgUrl}>
+                {({getRootProps, getInputProps}) => (
+                    <section>
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            <p>Upload Your Image - drag 'n' drop or click to upload</p>
+                        </div>
+                    </section>
+                )}
+            </Dropzone>
 
-        <label>
-            Location:
-        <input
-                type="text"
-                name="location"
-                id="location"
-                onChange={handleInputChange}
-                value={newStation.location}
-            />
-        </label>
-        
-        <Dropzone type="image" name="image" id="image" onDrop={handleImageUpload} value={newStation.image}>
-            {({getRootProps, getInputProps}) => (
-                <section>
-                    <div {...getRootProps()}>
-                        <input {...getInputProps()} />
-                        <p>Upload Your Image - drag 'n' drop or click to upload</p>
-                    </div>
-                </section>
-            )}
-        </Dropzone>
+            <ul>{files}</ul>
 
-        <ul>{files}</ul>
-
-        <div className="button-group">
-            <input className="button" type="submit" value="Submit" />
-        </div>
-    </>
-)
+            <div className="button-group">
+                <input className="button" type="submit" value="Submit" />
+            </div>
+        </>
+    )
 }
 
 export default newStationForm
