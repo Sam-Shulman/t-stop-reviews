@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import translateServerErrors from "./../services/translateServerErrors"
 import Dropzone from "react-dropzone"
+import ErrorList from "./layout/ErrorList.js"
 
 const newStationForm = (props) => {
     const [newStation, setNewStation] = useState ({
@@ -14,8 +15,8 @@ const newStationForm = (props) => {
     const [shouldRedirect, setShouldRedirect] = useState(false)
     const [files, setFiles] = useState([])
 
-    const addNewStation = async (event) => {
-        event.preventDefault()
+    const addNewStation = async event => {
+        // event.preventDefault()
         const newStationBody = new FormData()
         newStationBody.append("name", newStation.name)
         newStationBody.append("line", newStation.line)
@@ -25,9 +26,9 @@ const newStationForm = (props) => {
         try {
             const response = await fetch ("/api/v1/stations" , {
                 method: "POST",
-                headers: new Headers({
+                headers: {
                     "Accept": "image/jpeg"
-                }),
+                },
                 body: newStationBody
             })
 
@@ -37,7 +38,7 @@ const newStationForm = (props) => {
                     const newErrors = translateServerErrors(body.errors)
                     return setErrors(newErrors)
                 } else {
-                    const errorMessage = `${response.status} ($response.statusText)`
+                    const errorMessage = `${response.status} (${response.statusText})`
                     const error = new Error(errorMessage)
                     throw (error)
                 }
@@ -54,6 +55,8 @@ const newStationForm = (props) => {
         }
     }
 
+
+
     const handleInputChange = (event) => {
         setNewStation({
             ...newStation,
@@ -67,9 +70,9 @@ const newStationForm = (props) => {
         imgUrl: acceptedImage[0]
         })
         setFiles([
-            <li key={acceptedImage[0].path}>
+            <p key={acceptedImage[0].path}>
                 {acceptedImage[0].path} - {acceptedImage[0].size} bytes
-            </li>
+            </p>
         ])
     }
 
@@ -84,62 +87,64 @@ const newStationForm = (props) => {
 
     return (
         <>
-        <h1> Add A New Station </h1>
-        <form onSubmit={handleSubmit}/>
-            <label>
-                Station Name: 
+            <ErrorList errors={errors}/>
+            <h1> Add A New Station </h1>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Station Name: 
+                    <input 
+                        type="text"
+                        name="name"
+                        id="name"
+                        onChange={handleInputChange}
+                        value={newStation.name}
+                    />
+                </label>
+
+                <label>
+                    Line:
                 <input 
-                    type="text"
-                    name="name"
-                    id="name"
-                    onChange={handleInputChange}
-                    value={newStation.name}
-                />
-            </label>
+                        type="text"
+                        name="line"
+                        id="line"
+                        onChange={handleInputChange}
+                        value={newStation.line}
+                    />
+                </label>
 
-            <label>
-                Line:
-            <input 
-                    type="text"
-                    name="line"
-                    id="line"
-                    onChange={handleInputChange}
-                    value={newStation.line}
-                />
-            </label>
-
-            <label>
-                Location:
-            <input
-                    type="text"
-                    name="location"
-                    id="location"
-                    onChange={handleInputChange}
-                    value={newStation.location}
-                />
-            </label>
+                <label>
+                    Location:
+                <input
+                        type="text"
+                        name="location"
+                        id="location"
+                        onChange={handleInputChange}
+                        value={newStation.location}
+                    />
+                </label>
             
-            <Dropzone 
-                type="image" 
-                name="imgUrl" 
-                id="imgUrl" 
-                onDrop={handleImageUpload} 
-                value={newStation.imgUrl}>
-                {({getRootProps, getInputProps}) => (
-                    <section>
-                        <div {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            <p>Upload Your Image - drag 'n' drop or click to upload</p>
-                        </div>
-                    </section>
-                )}
-            </Dropzone>
+                <Dropzone 
+                    type="image" 
+                    name="imgUrl" 
+                    id="imgUrl" 
+                    onDrop={handleImageUpload} 
+                    value={newStation.imgUrl}>
+                    {({getRootProps, getInputProps}) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <p>Upload Your Image - drag 'n' drop or click to upload</p>
+                            </div>
+                        </section>
+                    )}
+                </Dropzone>
 
-            <ul>{files}</ul>
+                <ul>{files}</ul>
 
-            <div className="button-group">
-                <input className="button" type="submit" value="Submit" />
-            </div>
+                <div className="button-group">
+                    <input className="button" type="submit" value="Submit" />
+                </div>
+            </form>
         </>
     )
 }

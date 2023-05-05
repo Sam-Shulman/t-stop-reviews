@@ -30,14 +30,13 @@ stationRouter.get("/:id", async (req, res) => {
     }
 })
 
-stationRouter.post("/", uploadImage.single("image"), async (req, res) => {
+stationRouter.post("/", uploadImage.single("imgUrl"), async (req, res) => {
     try {
         const { body } = req
         const data = {
             ...body,
             image: req.file.location,
         }
-        console.log(req.file.location)
         const station = await Station.query().insertAndFetch(data)
         return res.status(201).json({ station })
     } catch (error) {
