@@ -14,7 +14,7 @@
     "start": "yarn workspace t-stop-reviews-server start",
     "dev:cypress": "yarn workspace t-stop-reviews-server dev:e2e",
     "e2e:open": "yarn workspace t-stop-reviews-e2e e2e:open",
-    "e2e:run": "yarn workspace t-stop-reviews-e2e e2e:run"
+    "e2e:run": "yarn workspace t-stop-reviews-e2e e2e:run",
   },
   "engines": {
     "node": "^16.18"
