@@ -12,6 +12,7 @@ const newStationForm = (props) => {
     })
     const [errors, setErrors] = useState({})
     const [shouldRedirect, setShouldRedirect] = useState(false)
+    const [files, setFiles] = useState([])
 
     // const [newStationFormData, setNewStationFormData] = useState({})
 
@@ -22,7 +23,6 @@ const newStationForm = (props) => {
         newStationBody.append("line", newStation.line)
         newStationBody.append("location", newStation.location)
         newStationBody.append("image", newStation.image)
-
 
         try {
             const response = await fetch ("/api/v1/stations" , {
@@ -64,10 +64,16 @@ const handleInputChange = (event) => {
 }
 
 const handleImageUpload = (acceptedImage) => {
+    console.log(acceptedImage)
     setNewStation({
       ...newStation,
       image: acceptedImage[0]
     })
+    setFiles([
+        <li key={acceptedImage[0].path}>
+            {acceptedImage[0].path} - {acceptedImage[0].size} bytes
+        </li>
+    ])
   }
 
 const handleSubmit = (event) => {
@@ -116,17 +122,7 @@ return (
             />
         </label>
         
-        {/* <label>
-            Image:
-        <input 
-                type="img"
-                name="image"
-                id="image"
-                onChange={handleInputChange}
-                value={newStation.image}
-            />
-        </label> */}
-        <Dropzone onDrop={handleImageUpload}>
+        <Dropzone type="image" name="image" id="image" onDrop={handleImageUpload} value={newStation.image}>
             {({getRootProps, getInputProps}) => (
                 <section>
                     <div {...getRootProps()}>
@@ -136,6 +132,8 @@ return (
                 </section>
             )}
         </Dropzone>
+
+        <ul>{files}</ul>
 
         <div className="button-group">
             <input className="button" type="submit" value="Submit" />
