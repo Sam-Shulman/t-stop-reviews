@@ -22,7 +22,7 @@ const StationShow = props => {
                 throw error
               }
             const body = await response.json()
-            setStation(body.station) // does not include imgUrl
+            setStation(body.station)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }

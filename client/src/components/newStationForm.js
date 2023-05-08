@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
-import translateServerErrors from "./../services/translateServerErrors"
+import translateServerErrors from "../services/translateServerErrors"
 import Dropzone from "react-dropzone"
 import ErrorList from "./layout/ErrorList.js"
 
-const newStationForm = (props) => {
+const NewStationForm = (props) => {
     const [newStation, setNewStation] = useState ({
         name: "",
         line: "",
@@ -43,11 +43,10 @@ const newStationForm = (props) => {
                 }
             } else {
                 const body = await response.json()
-                const bodyStation = body.station
-                setNewStation({
-                    // ...newStation,
-                    bodyStation
-            })
+            //     const bodyStation = body.station
+            //     setNewStation({
+            //         bodyStation
+            // })
                 setShouldRedirect(true)
             }
         } catch (err) {
@@ -148,4 +147,4 @@ const newStationForm = (props) => {
     )
 }
 
-export default newStationForm
+export default NewStationForm
