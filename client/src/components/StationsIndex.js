@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const StationIndex = props => {
 
-    // console.log(props)
     const [stations, setStations] = useState([])
 
     const getStations = async() => {
@@ -34,7 +33,6 @@ const StationIndex = props => {
             </li>
         )
     })
-    // console.log(stations)
 
     return (
         <div>
@@ -43,6 +41,5 @@ const StationIndex = props => {
         </div>
     )
 }
-
 
 export default StationIndex
