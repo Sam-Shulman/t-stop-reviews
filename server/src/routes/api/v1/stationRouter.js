@@ -5,8 +5,10 @@ import cleanUserInput from "../../../services/cleanUserInput.js"
 import Station from "../../../models/Station.js"
 import StationSerializer from "../../../serializers/StationSerializer.js"
 import uploadImage from "../../../services/uploadImage.js"
+import stationReviewsRouter from "./stationReviewRouter.js"
 
 const stationRouter = new express.Router()
+stationRouter.use("/:stationId/reviews", stationReviewsRouter)
 
 stationRouter.get("/", async (req, res) => {
     try {

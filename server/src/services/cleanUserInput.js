@@ -6,5 +6,5 @@ const cleanUserInput = formInput => {
     })
     return formInput
   }
-  
+
   export default cleanUserInput
