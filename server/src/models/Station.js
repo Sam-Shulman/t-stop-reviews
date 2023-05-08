@@ -8,11 +8,12 @@ class Station extends Model {
     static get jsonSchema() {
         return{
             type: "object",
-            required: ["name", "line", "location"],
+            required: ["name", "line", "location", "imgUrl"],
             properties: {
                 name: { type: "string" },
                 line: { type: "string" },
-                location: { type: "string" }
+                location: { type: "string" },
+                imgUrl: { type: ["string"] }
             }
         }
     }

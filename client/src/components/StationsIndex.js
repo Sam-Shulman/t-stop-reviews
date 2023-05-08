@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
 const StationIndex = props => {
+
     const [stations, setStations] = useState([])
 
     const getStations = async() => {
@@ -40,6 +41,5 @@ const StationIndex = props => {
         </div>
     )
 }
-
 
 export default StationIndex

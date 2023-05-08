@@ -1,7 +1,7 @@
 import ReviewSerializer from "./ReviewSerializer.js"
 class StationSerializer {
     static async getSummary(station) {
-        const allowedAttributes = ["id", "name", "line", "location"]
+        const allowedAttributes = ["id", "name", "line", "location", "imgUrl"]
         let serializedStation = {}
         for (const attribute of allowedAttributes) {
             serializedStation[attribute] = station[attribute]

@@ -11,6 +11,7 @@ const StationShow = props => {
         name: "",
         line: "",
         location: "",
+        imgUrl: "",
         reviews: []
     })
     const [errors, setErrors] = useState([])
@@ -72,8 +73,9 @@ const StationShow = props => {
         return (
         <>
             <h1>{station.name}</h1>
-            <p>{station.line}</p>
-            <p>{station.location}</p>
+            <h3>{station.line}</h3>
+            <h3>{station.location}</h3>
+            <img src={station.imgUrl} alt="station picture"/>
             <div>
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
