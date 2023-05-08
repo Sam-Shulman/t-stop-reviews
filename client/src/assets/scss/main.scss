@@ -8,6 +8,73 @@
   width: 50%;
   padding: 10px;
 }
+.top-sign-text {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.form-box {
+  border-left: 1px solid black;
+  padding-left: 10px; /* optional: add some left padding */
+}
+
+.form-border{
+  border: black;
+  border-style: double;
+}
+
+.border-for-review{
+  border: black;
+  border-style: double;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+.form-box {
+  border: black ;
+  padding-left: 10px;
+}
+
+form p {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+form input[type="text"],
+form input[type="radio"] {
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+form .button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+form .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
 .top-sign-text{
   margin: auto;
@@ -54,4 +121,30 @@
 :root {
   -moz-tab-size: 4;
   tab-size: 4;
+}
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  color: #ddd;
+  float: right;
+}
+
+.rating label:before {
+  content: "\263A";
+  font-size: 2em;
+  padding: 0.2em;
+}
+
+.rating input:checked ~ label {
+  color: #f70;
+}
+
+.rating input:checked ~ label:before {
+  content: "\263A";
 }

@@ -79,7 +79,7 @@ const StationShow = props => {
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
             </div>
-            <h3>Reviews for this Station: </h3>
+            <h3>What other people are saying</h3>
             {reviewTiles}
         </div>
     )

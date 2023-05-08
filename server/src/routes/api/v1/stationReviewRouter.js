@@ -7,13 +7,10 @@ import cleanUserInput from "../../../services/cleanUserInput.js";
 const stationReviewsRouter = new express.Router({ mergeParams: true })
 
 stationReviewsRouter.post("/", async (req, res) => {
-    const { body, rating, hasPolicePresence, hasSittingWater } = req.body
-    
-    //const formInput = cleanUserInput(reviewBody)
-    //const { body, rating, hasPolicePresence, hasSittingWater } = reviewBody
+    const formInput = cleanUserInput(req.body)
+    const { body, rating, hasPolicePresence, hasSittingWater } = formInput
     const { stationId } = req.params
     const userId = req.user.id
-    console.log(userId)
     try{
         const newReview = await Review.query().insertAndFetch({
             body, rating, hasPolicePresence, hasSittingWater, userId, stationId
