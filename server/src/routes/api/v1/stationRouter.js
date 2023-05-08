@@ -35,21 +35,24 @@ stationRouter.get("/:id", async (req, res) => {
 
 stationRouter.post("/", uploadImage.single("imgUrl"), async (req, res) => {
     try {
-        const { body } = req
-        // console.log(req.file)
+        const { body } = req;
+        let imgUrl = '';
+        if (req.file) {
+            imgUrl = req.file.location;
+        }
         const data = {
             ...body,
-            imgUrl: (req.file.location || "")
-        }
-        const formInput = cleanUserInput(data)
-        const station = await Station.query().insertAndFetch(formInput)
-        return res.status(201).json({ station })
+            imgUrl
+        };
+        const formInput = cleanUserInput(data);
+        const station = await Station.query().insertAndFetch(formInput);
+        return res.status(201).json({ station });
     } catch (error) {
         if (error instanceof ValidationError) {
-            return res.status(422).json({ errors: error.data })
+            return res.status(422).json({ errors: error.data });
         }
-        return res.status(500).json({ errors: error })
+        return res.status(500).json({ errors: error });
     }
-})
+});
 
 export default stationRouter

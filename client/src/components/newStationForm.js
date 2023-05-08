@@ -43,10 +43,6 @@ const NewStationForm = (props) => {
                 }
             } else {
                 const body = await response.json()
-            //     const bodyStation = body.station
-            //     setNewStation({
-            //         bodyStation
-            // })
                 setShouldRedirect(true)
             }
         } catch (err) {

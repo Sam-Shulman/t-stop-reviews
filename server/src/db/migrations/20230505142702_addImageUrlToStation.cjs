@@ -7,7 +7,7 @@
  */
 exports.up = async (knex) => {
     return knex.schema.table("stations", (table) => {
-      table.string("imgUrl")
+      table.string("imgUrl").notNullable()
     })
   }
   
