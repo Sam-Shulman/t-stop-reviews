@@ -9,14 +9,13 @@ const newStationForm = (props) => {
         name: "",
         line: "",
         location: "",
-        imgUrl: ""
+        imgUrl: {}
     })
     const [errors, setErrors] = useState({})
     const [shouldRedirect, setShouldRedirect] = useState(false)
     const [files, setFiles] = useState([])
 
     const addNewStation = async event => {
-        // event.preventDefault()
         const newStationBody = new FormData()
         newStationBody.append("name", newStation.name)
         newStationBody.append("line", newStation.line)
@@ -44,20 +43,20 @@ const newStationForm = (props) => {
                 }
             } else {
                 const body = await response.json()
-                setNewStation([
-                    ...newStation,
-                    body.station
-                ])
+                const bodyStation = body.station
+                setNewStation({
+                    // ...newStation,
+                    bodyStation
+            })
                 setShouldRedirect(true)
             }
         } catch (err) {
-        console.error(`Error in fetch: ${err.message}`)
+        console.error(`Error in addNewStation fetch: ${err.message}`)
         }
     }
 
-
-
     const handleInputChange = (event) => {
+        event.preventDefault()
         setNewStation({
             ...newStation,
             [event.currentTarget.name]: event.currentTarget.value

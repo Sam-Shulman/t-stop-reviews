@@ -7,6 +7,7 @@ const StationShow = props => {
         name: "",
         line: "",
         location: "",
+        imgUrl: "",
         reviews: []
     })
 
@@ -21,7 +22,7 @@ const StationShow = props => {
                 throw error
               }
             const body = await response.json()
-            setStation(body.station)
+            setStation(body.station) // does not include imgUrl
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }
@@ -40,6 +41,7 @@ const StationShow = props => {
             <h1>{station.name}</h1>
             <h3>{station.line}</h3>
             <h3>{station.location}</h3>
+            <img src={station.imgUrl} alt="station picture"/>
             <h3>Reviews for this Station: </h3>
             {reviewTiles}
         </>

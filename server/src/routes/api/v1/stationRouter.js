@@ -1,5 +1,8 @@
 import express from "express"
-import { Station } from "../../../models/index.js"
+import objection from "objection"
+const { ValidationError } = objection
+//clean user input
+import Station from "../../../models/Station.js"
 import StationSerializer from "../../../serializers/StationSerializer.js"
 import uploadImage from "../../../services/uploadImage.js"
 
@@ -35,11 +38,14 @@ stationRouter.post("/", uploadImage.single("imgUrl"), async (req, res) => {
         const { body } = req
         const data = {
             ...body,
-            image: req.file.location,
+            imgUrl: req.file.location,
         }
         const station = await Station.query().insertAndFetch(data)
         return res.status(201).json({ station })
     } catch (error) {
+        if (error instanceof ValidationError) {
+            return res.status(422).json({ errors: error.data })
+        }
         return res.status(500).json({ errors: error })
     }
 })
