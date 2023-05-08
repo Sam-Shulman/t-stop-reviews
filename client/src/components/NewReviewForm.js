@@ -32,17 +32,8 @@ const NewReviewForm = ({ postReview }) => {
         <div>
             <h1>Add a Review for this Station!</h1>
             <form onSubmit={handleSubmit} >
-                <label>
-                    <p>Review:</p>
-                    <input
-                    type="text"
-                    name="body"
-                    onChange={handleInputChange}
-                    value={newReview.body}
-                    />
-                </label>
                 <div>
-                    <p>Enter A Rating</p>
+                    <p>Enter A Rating:</p>
                     <label>
                         <input
                         type="text"
@@ -52,6 +43,15 @@ const NewReviewForm = ({ postReview }) => {
                         />
                     </label>
                 </div>
+                <label>
+                    <p>Review:</p>
+                    <input
+                    type="text"
+                    name="body"
+                    onChange={handleInputChange}
+                    value={newReview.body}
+                    />
+                </label>
                 <div>
                     <p>Did this station have a police presence?</p>
                     <input
