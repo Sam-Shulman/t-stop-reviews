@@ -13,7 +13,7 @@ class Station extends Model {
                 name: { type: "string" },
                 line: { type: "string" },
                 location: { type: "string" },
-                imgUrl: { type: ["string", "object"] }
+                imgUrl: { type: ["string"] }
             }
         }
     }
