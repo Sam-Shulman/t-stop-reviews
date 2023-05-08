@@ -4,7 +4,7 @@ import StationSerializer from "../../../serializers/StationSerializer.js"
 import stationReviewsRouter from "./stationReviewRouter.js"
 
 const stationRouter = new express.Router()
-stationRouter.use("/:stationId", stationReviewsRouter)
+stationRouter.use("/:stationId/reviews", stationReviewsRouter)
 
 stationRouter.get("/", async (req, res) => {
     try {

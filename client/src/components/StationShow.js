@@ -32,10 +32,9 @@ const StationShow = props => {
         }
     }
 
-    
-    const postReview = async (newReviewData) => {
+     const postReview = async (newReviewData) => {
         try{
-            const response = await fetch(`/api/v1/stations/${stationId}`, {
+            const response = await fetch(`/api/v1/stations/${stationId}/reviews`, {
                 method: "POST",
                 headers: new Headers({
                     "Content-Type": "application/json"
@@ -71,7 +70,7 @@ const StationShow = props => {
     })
     
         return (
-        <div>
+        <>
             <h1>{station.name}</h1>
             <p>{station.line}</p>
             <p>{station.location}</p>
@@ -81,7 +80,7 @@ const StationShow = props => {
             </div>
             <h3>What other people are saying</h3>
             {reviewTiles}
-        </div>
+        </>
     )
 }
 
