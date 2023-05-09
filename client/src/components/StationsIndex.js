@@ -26,18 +26,26 @@ const StationIndex = props => {
 
     const stationIndexItems = stations.map(stationItem => {
         return (
-            <li key={stationItem.id}>
-                <Link to={`/stations/${stationItem.id}`}>
-                    {stationItem.name}
-                </Link>
-            </li>
+            <div className="tile-border">
+                <div className="font-apply index-text-size" key={stationItem.id}>
+                    <Link to={`/stations/${stationItem.id}`}>
+                        <p>{stationItem.name}</p>
+                    </Link>
+                        <p>{stationItem.line}</p>
+                        <p>{stationItem.location}</p>
+                        <div>
+                             <img className="img-format" src={stationItem.imgUrl} alt="station picture"/>
+                        </div>
+                </div>
+            </div>
         )
     })
 
     return (
         <div>
-            <h1>Boston T Stations</h1>
-            <ul>{stationIndexItems}</ul>
+            <h1 className="font-apply index-top-text">Boston T Stations</h1>
+            <br></br>
+            <div className="index-item-styling"> {stationIndexItems} </div>
         </div>
     )
 }
