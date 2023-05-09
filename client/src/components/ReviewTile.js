@@ -1,10 +1,19 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import ErrorList from "./ErrorList.js"
+import translateServerErrors from "../services/translateServerErrors.js"
 
-const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
-    const [upvotes, setUpvotes] = useState(0)
-    const [downvotes, setDownvotes] = useState(0)
-    const [hasUpvoted, setHasUpvoted] = useState(false)
-    const [hasDownvoted, setHasDownvoted] = useState(false)
+
+const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater }) => {
+    
+    const [review, setReview] = useState({
+        body: "",
+        rating: "",
+        hasPolicePresence: null,
+        hasSittingWater: null
+    })
+
+    const [errors, setErrors] = useState([])
+    
 
     let hasPolicePresenceSection, hasSittingWaterSection
 
@@ -19,30 +28,58 @@ const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
     } else {
         hasSittingWaterSection = <p>There was not random sitting water!</p>
     }
-
-    const handleUpvote = () => {
-        if(!hasUpvoted){
-            setUpvotes(upvotes + 1)
-            setUpvotes(true)  
-            if(hasDownvoted) {
-                setDownvotes(downvotes -1)
-                setHasDownvoted(false)
-            } 
-        }    
+    
+    const getReview = async () => {
+        try {
+            const response = await fetch (`/api/v1/stations/${stationId}/reviews/${reviewId}`)
+            if (!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`
+                const error = new Error(errorMessage)
+                throw error
+              }
+            const body = await response.json()
+            setReview(body.review)
+        } catch (err) {
+            console.error(`Error in fetch: ${err.message}`)
+        }
     }
-
-    const handleDownvote = () => {
-        if(!hasDownvoted) {
-            setDownvotes(downvotes + 1)
-            setHasDownvoted(true)
-            if(hasUpvoted){
-                setUpvotes(upvotes -1)
-                setHasUpvoted(false)
+    
+    const postVote = async (vote) => {
+        try{
+            const response = await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}/votes`, {
+                method: "POST",
+                headers: new Headers({
+                    "Content-Type": "application/json"
+                }),
+                body: JSON.stringify(vote)
+            })
+            if (!response.ok) {
+                if (response.status === 422) {
+                    const errorBody = await response.json()
+                    const newErrors = translateServerErrors(errorBody.errors)
+                    return setErrors(newErrors)
+                } else {
+                    const errorMessage = `${response.status} (${response.statusText})`
+                    const error = new Error(errorMessage)
+                    throw error
+                }
+            } else {
+                const responseBody = await response.json()
+                setErrors([])
+                setReview((prevState) => ({...prevState, votes: responseBody.review.votes}));
             }
+        } catch (err){
+            console.error(`Error in fetch: ${err.message}`)
         }
     }
 
-    const totalVotes = upvotes - downvotes
+    useEffect(() => {
+        getReview()
+    }, [])
+    
+    const voteTiles = review.votes.map((voteObject) => {
+        return <VoteTile key={voteObject.id} stationId={stationId} reviewId={reviewId} {...voteObject} postVote={postVote}/>
+      })      
 
     return (
         <div className="callout">
@@ -50,15 +87,7 @@ const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
             <p>Rating: {rating}</p>
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
-            <div className="voting-section">
-                <button onClick={handleUpvote} className="upvote">
-                    <span role="img" aria-label="upvote">&#x2191;</span>
-                </button>
-                <span>{totalVotes}</span>
-                <button onClick={handleDownvote} className="downvote">
-                    <span role="img" aria-label="downvote">&#x2193;</span>
-                </button>
-            </div>
+            {voteTiles}
         </div>
     )
 }

@@ -3,8 +3,11 @@ import objection from "objection";
 const { ValidationError } = objection
 import { Review } from "../../../models/index.js"
 import cleanUserInput from "../../../services/cleanUserInput.js";
+import reviewsVoteRouter from "./reviewsVoteRouter.js";
 
 const stationReviewsRouter = new express.Router({ mergeParams: true })
+stationReviewsRouter.use("/:reviewId/votes", reviewsVoteRouter)
+
 
 stationReviewsRouter.post("/", async (req, res) => {
     const formInput = cleanUserInput(req.body)

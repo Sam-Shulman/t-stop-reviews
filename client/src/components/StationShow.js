@@ -5,7 +5,7 @@ import ErrorList from "./ErrorList.js"
 import translateServerErrors from "../services/translateServerErrors.js"
 
 
-const StationShow = props => {
+const StationShow = (props) => {
 
     const [station, setStation] = useState({
         name: "",
@@ -15,7 +15,6 @@ const StationShow = props => {
         reviews: []
     })
     const [errors, setErrors] = useState([])
-
     const stationId = props.match.params.id
 
     const getStation = async () => {
@@ -25,7 +24,7 @@ const StationShow = props => {
                 const errorMessage = `${response.status} (${response.statusText})`
                 const error = new Error(errorMessage)
                 throw error
-              }
+                }
             const body = await response.json()
             setStation(body.station)
         } catch (err) {
@@ -67,7 +66,8 @@ const StationShow = props => {
         getStation()
     }, [])
     const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+        return <ReviewTile stationId={stationId}
+        key={reviewObject.id} {...reviewObject}/>
     })
     
         return (
