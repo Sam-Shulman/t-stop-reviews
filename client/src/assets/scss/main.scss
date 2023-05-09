@@ -2,7 +2,73 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 // place global css here
+.img-format {
+  width: 400px;
+  height:400px;
+  text-align: center;
+  display: block;
+  display: block;
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
+.hi {
+  display:flex;
+  flex-wrap: wrap;
+  height: 500px;
+  align-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tile-border{
+  border: black;
+  border-style: solid;
+  margin: 100px;
+  padding-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.show-img{
+  display: block;
+  margin-left: auto;
+  width: 1000px;
+  height: 600px;
+  padding-bottom: 100px;
+}
+
+.font-apply{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
+}
+.index-top-text{
+  text-align: center;
+  padding-top: 50px;
+  font-weight:bold;
+  padding-right: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
+}
+
+body{
+  background-image: url(https://i.imgur.com/RWbnme2.jpeg);
+  background-color: gray;
+  height: 500px;
+  background-position: center;
+  background-size: cover;
+}
+
+.column {
+  flex: 1;
+}
 .center{
   margin: auto;
   width: 50%;
