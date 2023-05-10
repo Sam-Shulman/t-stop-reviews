@@ -2,6 +2,12 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
+.grid-container {
+  padding-top: 100px;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  background-color: white;
+}
 .img-format {
   width: 400px;
   height:400px;
@@ -140,7 +146,6 @@ body {
   margin: auto;
   width: 500px;
   padding: 0px;
-  // background-color: red;
 }
 
 .form-box {
@@ -176,8 +181,6 @@ form label {
 
 form input[type="text"],
 form input[type="radio"] {
-  // width: 100%;
-  // margin-left: 10px;
   font-size: 16px;
 }
 
@@ -188,7 +191,7 @@ form .button-group {
 }
 
 form .button {
-  background-color: #4CAF50;
+  background-color: #185C94;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -197,6 +200,7 @@ form .button {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 10%;
 }
 
 .top-sign-text {
@@ -206,6 +210,7 @@ form .button {
   font-size: 28px;
   margin-bottom: 20px;
   margin-top: 20px;
+  text-align: center;
 }
 
 .form-border {
@@ -229,12 +234,11 @@ form .button {
 }
 
 .sign-in-border {
-  border: 2px solid $medium-gray;
+  border: 2px solid black;
   width: 60%;
-  margin-top: 90px;
+  padding-top: 90px;
   font-family: Montserrat, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
-  // width:75%;
-  text-align: center;
+  border-radius: 10%;
 }
 
 .top-bar-color {
@@ -269,10 +273,11 @@ form .button {
 
 .rating {
   display: inline;
-  // display: flex;
-  // flex-direction: row-reverse;
-  // justify-content: left; /* choose where you want to place your rating horizontally */
-  // display: flex;
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 
 .rating input {
@@ -283,13 +288,22 @@ form .button {
   color: #ddd;
   display: inline-block;
   justify-content: left;
-
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 
 .rating label:before {
   content: "\263A";
   font-size: 2em;
   padding: 0.2em;
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 
 .rating input:checked ~ label {

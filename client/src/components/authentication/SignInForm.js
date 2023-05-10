@@ -75,15 +75,16 @@ const SignInForm = () => {
       <h4 className="top-sign-text" >Sign In</h4>
       <form>
         <div>
-          <label className="center">
+          <label>
             Email
+            </label>
             <input placeholder="Your Email" type="text" name="email" value={userPayload.email} onChange={onInputChange} />
             <FormError error={errors.email} />
-          </label>
         </div>
         <div>
-          <label className="center">
+          <label>
             Password
+            </label>
             <input
               placeholder="Your Password"
               type="password"
@@ -92,7 +93,6 @@ const SignInForm = () => {
               onChange={onInputChange}
             />
             <FormError error={errors.password} />
-          </label>
         </div>
         <div className="bot-sign-button">
           <input type="submit" className="button" value="Sign In" />

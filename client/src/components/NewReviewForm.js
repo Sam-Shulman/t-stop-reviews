@@ -38,9 +38,9 @@ const NewReviewForm = ({ postReview }) => {
     return (
         <div className="form-border">
             <h1 className="top-sign-text">Add a Review for this Station!</h1>
+            <p>Rate the station:</p>
             <form onSubmit={handleSubmit}>
                 <div className="rating">
-                    <p>Rate the station:</p>
                     <input type="radio" id="star1" name="rating" value="5" onChange={handleStarClick}/>
                     <label htmlFor="star1" title="1 trains"></label>
                     <input type="radio" id="star2" name="rating" value="4" onChange={handleStarClick}/>
