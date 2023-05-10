@@ -1,8 +1,9 @@
 import express from "express";
 import { Vote } from "../../../models/index.js"
+import VoteSerializer from "../../../serializers/VoteSerializer.js";
 
 const reviewsVoteRouter = new express.Router({ mergeParams: true })
-stationRouter.use("/:reviewId/votes", stationReviewsRouter)
+
 
 reviewsVoteRouter.post("/", async (req,res) => {
     const { reviewId } = req.params
@@ -18,6 +19,21 @@ reviewsVoteRouter.post("/", async (req,res) => {
         return res.status(500).json({ errors: error})
     }
 })
+
+reviewsVoteRouter.get("/:id", async (req, res) => {
+    try {
+        const votes = await Vote.query()
+        const serializedVotes = await Promise.all(
+            votes.map(async (vote) => {
+              return  VoteSerializer.getSummary(vote)
+            })
+          )
+        return res.status(200).json({ votes: serializedVotes })
+    } catch (err) {
+        return res.status(500).json({ errors: err })
+    }
+})
+
 
 
 export default reviewsVoteRouter
