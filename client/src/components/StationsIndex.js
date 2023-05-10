@@ -25,8 +25,22 @@ const StationIndex = props => {
     }, [])
 
     const stationIndexItems = stations.map(stationItem => {
+
+        let borderColor
+        if (stationItem.line.includes("Orange")) {
+            borderColor = "orange-border"
+        } else if (stationItem.line.includes("Green")) {
+            borderColor = "green-border"
+        } else if (stationItem.line.includes("Blue")) {
+            borderColor = "blue-border"
+        } else if (stationItem.line.includes("Red")) {
+            borderColor = "red-border"
+        } else if (stationItem.line.includes("Silver")) {
+            borderColor = "silver-border"
+        }
+
         return (
-            <div className="tile-border">
+            <div className={`tile-border ${borderColor}`}>
                 <div className="font-apply index-text-size" key={stationItem.id}>
                     <Link to={`/stations/${stationItem.id}`}>
                         <p>{stationItem.name}</p>
@@ -34,7 +48,7 @@ const StationIndex = props => {
                         <p>{stationItem.line}</p>
                         <p>{stationItem.location}</p>
                         <div>
-                             <img className="img-format" src={stationItem.imgUrl} alt="station picture"/>
+                             <img className="img-format" src={stationItem.imgUrl} alt={`${stationItem.name} Station Picture`}/>
                         </div>
                 </div>
             </div>
