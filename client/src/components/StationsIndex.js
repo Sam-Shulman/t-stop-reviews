@@ -48,7 +48,7 @@ const StationIndex = props => {
                         <p>{stationItem.line}</p>
                         <p>{stationItem.location}</p>
                         <div>
-                             <img className="img-format" src={stationItem.imgUrl} alt="Station Photo"/>
+                             <img className="img-format" src={stationItem.imgUrl} alt={`${stationItem.name} Station Picture`}/>
                         </div>
                 </div>
             </div>
