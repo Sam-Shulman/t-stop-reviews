@@ -138,8 +138,9 @@ body {
 
 .center{
   margin: auto;
-  width: 50%;
-  padding: 10px;
+  width: 500px;
+  padding: 0px;
+  // background-color: red;
 }
 
 .form-box {
@@ -175,7 +176,8 @@ form label {
 
 form input[type="text"],
 form input[type="radio"] {
-  margin-left: 10px;
+  // width: 100%;
+  // margin-left: 10px;
   font-size: 16px;
 }
 
@@ -227,10 +229,12 @@ form .button {
 }
 
 .sign-in-border {
-  border: 1px solid $medium-gray;
-  width: 35%;
-  padding-top: 90px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border: 2px solid $medium-gray;
+  width: 60%;
+  margin-top: 90px;
+  font-family: Montserrat, HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+  // width:75%;
+  text-align: center;
 }
 
 .top-bar-color {
@@ -277,7 +281,7 @@ form .button {
 
 .rating label {
   color: #ddd;
-  display:inline-block;
+  display: inline-block;
   justify-content: left;
 
 }
