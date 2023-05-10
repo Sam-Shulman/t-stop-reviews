@@ -10,6 +10,6 @@ rootRouter.use("/", clientRouter);
 rootRouter.use("/api/v1/user-sessions", userSessionsRouter);
 rootRouter.use("/api/v1/users", usersRouter);
 rootRouter.use("/api/v1/stations", stationRouter)
-rootRouter.use("/api/v1/votes", votesRouter)
+
 
 export default rootRouter;

@@ -2,6 +2,11 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
+
+.vote-buttons{
+  font-size: xx-large;
+}
+
 .img-format {
   width: 400px;
   height:400px;
@@ -210,6 +215,7 @@ form .button {
   margin: 4px 2px;
   cursor: pointer;
 }
+
 
 .top-sign-text {
   margin: auto;
