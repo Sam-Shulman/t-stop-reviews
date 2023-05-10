@@ -38,19 +38,19 @@ const NewReviewForm = ({ postReview }) => {
     return (
         <div className="form-border">
             <h1 className="top-sign-text">Add a Review for this Station!</h1>
+            <p>Rate the station:</p>
             <form onSubmit={handleSubmit}>
-                <div className="rating form-border">
-                    <p>Rate the station:</p>
-                    <input type="radio" id="star5" name="rating" value="5" onChange={handleStarClick}/>
-                    <label htmlFor="star5" title="5 trains"></label>
-                    <input type="radio" id="star4" name="rating" value="4" onChange={handleStarClick}/>
-                    <label htmlFor="star4" title="4 trains"></label>
+                <div className="rating">
+                    <input type="radio" id="star1" name="rating" value="5" onChange={handleStarClick}/>
+                    <label htmlFor="star1" title="1 trains"></label>
+                    <input type="radio" id="star2" name="rating" value="4" onChange={handleStarClick}/>
+                    <label htmlFor="star2" title="2 trains"></label>
                     <input type="radio" id="star3" name="rating" value="3" onChange={handleStarClick}/>
                     <label htmlFor="star3" title="3 trains"></label>
-                    <input type="radio" id="star2" name="rating" value="2" onChange={handleStarClick}/>
-                    <label htmlFor="star2" title="2 trains"></label>
-                    <input type="radio" id="star1" name="rating" value="1"onChange={handleStarClick}/>
-                    <label htmlFor="star1" title="1 train"></label>
+                    <input type="radio" id="star4" name="rating" value="2" onChange={handleStarClick}/>
+                    <label htmlFor="star4" title="4 trains"></label>
+                    <input type="radio" id="star5" name="rating" value="1"onChange={handleStarClick}/>
+                    <label htmlFor="star5" title="5 train"></label>
                 </div>
 
                 <label>
