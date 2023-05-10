@@ -88,7 +88,11 @@ const StationShow = props => {
         <>
             <div className="show-formatter">
                 <img className={`show-image-formatter ${borderColor}`} src={station.imgUrl} alt="station picture"/>
-                <h3 className={`show-page-text`}> Station: {station.name} ‎ ‎ ‎ ‎   Line: {station.line} ‎ ‎ ‎ ‎  Location: {station.location} </h3>
+                <div className="show-page-text">
+                    <h3>{station.name}</h3>
+                    <h3>{station.line} Line</h3>
+                    <h3>{station.location}</h3>
+                </div>
             </div>
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
