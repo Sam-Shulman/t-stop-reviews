@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const VoteTile = ({ stationId, reviewId }) => {
+const VoteTile = ({ stationId, reviewId, userId, value }) => {
   const [upvotes, setUpvotes] = useState(0);
   const [downvotes, setDownvotes] = useState(0);
   const [hasUpvoted, setHasUpvoted] = useState(false);
@@ -56,8 +56,9 @@ const VoteTile = ({ stationId, reviewId }) => {
     }
   };
 
-  const totalVotes = upvotes - downvotes;
+  const totalVotes = upvotes - downvotes
 
+  
   return (
     <div className="voting-section">
       <button onClick={handleUpvote} className="upvote">

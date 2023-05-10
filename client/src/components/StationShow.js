@@ -65,25 +65,37 @@ const StationShow = (props) => {
     useEffect(() => {
         getStation()
     }, [])
+
     const reviewTiles = station.reviews.map((reviewObject)=> {
         return <ReviewTile stationId={stationId}
         key={reviewObject.id} {...reviewObject}/>
     })
+
+    let borderColor
+    if (station.line.includes("Orange")) {
+        borderColor = "orange-border"
+    } else if (station.line.includes("Green")) {
+        borderColor = "green-border"
+    } else if (station.line.includes("Blue")) {
+        borderColor = "blue-border"
+    } else if (station.line.includes("Red")) {
+        borderColor = "red-border"
+    } else if (station.line.includes("Silver")) {
+        borderColor = "silver-border"
+    }
     
-        return (
+    return (
         <>
-            <h1>{station.name}</h1>
-            <h3>{station.line}</h3>
-            <h3>{station.location}</h3>
-            <img src={station.imgUrl} alt="station picture"/>
-            <div>
+            <div className="show-formatter">
+                <img className={`show-image-formatter ${borderColor}`} src={station.imgUrl} alt="station picture"/>
+                <h3 className={`show-page-text`}> Station: {station.name} ‎ ‎ ‎ ‎   Line: {station.line} ‎ ‎ ‎ ‎  Location: {station.location} </h3>
+            </div>
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
-            </div>
-            <h3>What other people are saying</h3>
-            {reviewTiles}
+                <h3>What other people are saying</h3>
+                {reviewTiles}
         </>
-    )
+    )   
 }
 
 export default StationShow

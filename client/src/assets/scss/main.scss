@@ -1,29 +1,163 @@
 @import "./foundation/settings";
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
-// place global css here
+
+.img-format {
+  width: 400px;
+  height:400px;
+  text-align: center;
+  display: block;
+  display: block;
+  margin: 0 auto;
+  padding-top: 15px;
+  padding-bottom: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.index-item-styling {
+  display:flex;
+  flex-wrap: wrap;
+  height: 500px;
+  align-content: space-between;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tile-border {
+  border: black;
+  border-style: solid;
+  border-width: 10px;
+  margin: 100px;
+  padding-top: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.show-page-text {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+  margin: 50px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.show-image-formatter{
+  display: block;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  width: 900px;
+  height: 675px;
+  margin-top: 75px;
+  border-color: black;
+  border-style: solid;
+  border-width: 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.green-border{
+  border: #30843C;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.blue-border{
+  border: #183CA4;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.orange-border{
+  border: #F08C04;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.red-border{
+  border: #E02C1C;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.silver-border{
+  border: #80848C;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.index-text-size{
+  font-size: x-large;
+}
+
+.show-img{
+  display: block;
+  margin-left: auto;
+  width: 1000px;
+  height: 600px;
+  padding-bottom: 100px;
+}
+
+.font-apply{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
+}
+
+.index-top-text{
+  text-align: center;
+  padding-top: 50px;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
+}
+
+body {
+  background-image: url(https://i.imgur.com/RWbnme2.jpeg);
+  background-color: gray;
+  height: 500px;
+  background-position: center;
+  background-size: cover;
+}
+
+.column {
+  flex: 1;
+}
 
 .center{
   margin: auto;
   width: 50%;
   padding: 10px;
 }
+
 .top-sign-text {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 20px;
 }
+
 .form-box {
   border-left: 1px solid black;
-  padding-left: 10px; /* optional: add some left padding */
+  padding-left: 10px;
 }
 
-.form-border{
+.form-border {
   border: black;
   border-style: double;
 }
 
-.border-for-review{
+.border-for-review {
   border: black;
   border-style: double;
 }
@@ -34,6 +168,7 @@ form {
   width: 50%;
   margin: 0 auto;
 }
+
 .form-box {
   border: black ;
   padding-left: 10px;
@@ -76,25 +211,28 @@ form .button {
   cursor: pointer;
 }
 
-.top-sign-text{
+.top-sign-text {
   margin: auto;
   width: 50%;
   padding-left: 80px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.bot-sign-button{
+
+.bot-sign-button {
   margin: auto;
   width: 10%;
   padding-right: 65px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.sign-in-border{
+
+.sign-in-border {
   border: 1px solid $medium-gray;
   width: 35%;
   padding-top: 90px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.top-bar-color{
+
+.top-bar-color {
   background-color: #165c96;
   color: #165c96;
   ul {
@@ -102,12 +240,13 @@ form .button {
     color: #165c96;
   }
 }
-.top-bar-text{
+
+.top-bar-text {
   color:white;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.app-formatting{
+.app-formatting {
   padding-top: 6px;
   padding-left: 2px;
 }
@@ -122,6 +261,7 @@ form .button {
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
 .rating {
   display: inline-block;
 }
@@ -147,9 +287,12 @@ form .button {
 
 .rating input:checked ~ label:before {
   content: "\263A";
+<<<<<<< HEAD
 }
 
 .upvote {
   padding-left: 3 em;
 
+=======
+>>>>>>> dc1b95d48e2e18613fe7c018f5435ed9d1ed9a67
 }

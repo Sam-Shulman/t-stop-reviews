@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react"
 import ErrorList from "./ErrorList.js"
 import translateServerErrors from "../services/translateServerErrors.js"
+import VoteTile from "./VoteTile.js"
 
 
-const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater }) => {
+const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater, stationId, reviewId }) => {
     
     const [review, setReview] = useState({
         body: "",
         rating: "",
         hasPolicePresence: null,
-        hasSittingWater: null
+        hasSittingWater: null,
+        votes: []
     })
 
     const [errors, setErrors] = useState([])
-    
 
     let hasPolicePresenceSection, hasSittingWaterSection
 
@@ -38,7 +39,7 @@ const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater }) => {
                 throw error
               }
             const body = await response.json()
-            setReview(body.review)
+            setReview(body)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }

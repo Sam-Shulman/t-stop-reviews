@@ -5,7 +5,8 @@ const NewReviewForm = ({ postReview }) => {
         body: "",
         rating: "",
         hasPolicePresence: null,
-        hasSittingWater: null
+        hasSittingWater: null,
+        votes: []
     })
 
     const handleInputChange = (event) => {
@@ -32,6 +33,7 @@ const NewReviewForm = ({ postReview }) => {
             rating: "",
             hasPolicePresence: null,
             hasSittingWater: null,
+            votes: []
         })
     }
 

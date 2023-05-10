@@ -25,19 +25,41 @@ const StationIndex = props => {
     }, [])
 
     const stationIndexItems = stations.map(stationItem => {
+
+        let borderColor
+        if (stationItem.line.includes("Orange")) {
+            borderColor = "orange-border"
+        } else if (stationItem.line.includes("Green")) {
+            borderColor = "green-border"
+        } else if (stationItem.line.includes("Blue")) {
+            borderColor = "blue-border"
+        } else if (stationItem.line.includes("Red")) {
+            borderColor = "red-border"
+        } else if (stationItem.line.includes("Silver")) {
+            borderColor = "silver-border"
+        }
+
         return (
-            <li key={stationItem.id}>
-                <Link to={`/stations/${stationItem.id}`}>
-                    {stationItem.name}
-                </Link>
-            </li>
+            <div className={`tile-border ${borderColor}`}>
+                <div className="font-apply index-text-size" key={stationItem.id}>
+                    <Link to={`/stations/${stationItem.id}`}>
+                        <p>{stationItem.name}</p>
+                    </Link>
+                        <p>{stationItem.line}</p>
+                        <p>{stationItem.location}</p>
+                        <div>
+                             <img className="img-format" src={stationItem.imgUrl} alt={`${stationItem.name} Station Picture`}/>
+                        </div>
+                </div>
+            </div>
         )
     })
 
     return (
         <div>
-            <h1>Boston T Stations</h1>
-            <ul>{stationIndexItems}</ul>
+            <h1 className="font-apply index-top-text">Boston T Stations</h1>
+            <br></br>
+            <div className="index-item-styling"> {stationIndexItems} </div>
         </div>
     )
 }
