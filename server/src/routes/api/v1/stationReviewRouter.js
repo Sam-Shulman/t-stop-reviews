@@ -24,4 +24,18 @@ stationReviewsRouter.post("/", async (req, res) => {
     }
 })
 
+//`api/v1/stations/${stationId}/reviews/${reviewId}` 
+
+stationReviewsRouter.delete("/:id", async (req, res) => {
+    debugger
+    const { id } = req.params
+    debugger
+    try {
+      await Review.query().deleteById(id)
+      return res.status(200).json({message: "Comment was deleted"})
+    } catch (error) {
+      return res.status(500).json({ errors: error})
+    }
+  })
+
 export default stationReviewsRouter

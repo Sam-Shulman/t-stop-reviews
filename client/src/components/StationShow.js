@@ -6,7 +6,6 @@ import translateServerErrors from "../services/translateServerErrors.js"
 
 
 const StationShow = props => {
-
     const [station, setStation] = useState({
         name: "",
         line: "",
@@ -62,13 +61,33 @@ const StationShow = props => {
             console.error(`Error in fetch: ${error.message}`)
         }
     }
+    //debugger
+
+    // delete endpoint is trying to call from /stations/api/v1/stations/id/reviews/id and the first /stations shouldnt be there
+
+    const handleDeleteReview = async (reviewId) => {
+        const response =  await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        if(!response.ok) {
+            const errorMessage= `${response.status} (${response.statusText})`
+            throw new Error(errorMessage)
+        }
+        const responseBody = await response.json()
+        setStation({
+            ...station, ["reviews"]: responseBody.reviews
+        })
+    }
     
     useEffect(() => {
         getStation()
     }, [])
 
     const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+        return <ReviewTile key={reviewObject.id} stationId={stationId} handleDeleteReview={handleDeleteReview} {...reviewObject}/>
     })
 
     let borderColor
