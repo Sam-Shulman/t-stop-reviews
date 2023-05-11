@@ -313,3 +313,10 @@ form .button {
 .rating input:checked ~ label:before {
   content: "\263A";
 }
+
+.deleteButton{
+  padding-top: 50px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
