@@ -61,7 +61,6 @@ const StationShow = props => {
             console.error(`Error in fetch: ${error.message}`)
         }
     }
-    //debugger
 
     // delete endpoint is trying to call from /stations/api/v1/stations/id/reviews/id and the first /stations shouldnt be there
 
@@ -85,6 +84,8 @@ const StationShow = props => {
     useEffect(() => {
         getStation()
     }, [])
+
+    console.log(station.reviews)
 
     const reviewTiles = station.reviews.map((reviewObject)=> {
         return <ReviewTile key={reviewObject.id} stationId={stationId} handleDeleteReview={handleDeleteReview} {...reviewObject}/>
