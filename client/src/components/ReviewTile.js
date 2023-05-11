@@ -1,8 +1,6 @@
 import React from "react";
 
 const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSittingWater, handleDeleteReview }) => {
-    //console.log(props)
-    // console.log(id)
 
     let hasPolicePresenceSection, hasSittingWaterSection
 
@@ -20,7 +18,6 @@ const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSitting
 
     const clickHandler = event => {
         event.preventDefault()
-        // console.log(event)
         handleDeleteReview(id)
     }
 
@@ -31,8 +28,9 @@ const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSitting
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
             <div>
-                <input type="button" className="deleteButton" onClick={clickHandler}></input>
+                <input type="submit" className="button" onClick={clickHandler} value="Delete"></input>
             </div>
+            {/* input className="deleteButton" type="button" onClick={clickHandler} value="Post Review" */}
         </div>
     )
 }
