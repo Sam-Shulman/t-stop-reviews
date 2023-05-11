@@ -8,21 +8,21 @@ Sam Shulman, Cooper Dutfield, Julia Connor, Rachael Lahey
 https://localhost3000
 
 ### Technologies used: 
-    *JavaScript
-    *Express
-    *React
-    *Foundations CSS
-    *PostgreSQL
+    - JavaScript
+    - Express
+    - React
+    - Foundations CSS
+    - PostgreSQL
 
 ### Installation
-    *Run `git clone https://github.com/Sam-Shulman/t-stop-reviews.git` in your terminal.
-    *Navigate to the app in your terminal: `cd t-stop-reviews`
-    *Navigate to the server folder to complete the following commands: `cd server`
-    *Create the database using postGresSQL: `createdb t-stop-reviews_development`
-    *run yarn install in your terminal before opening the app: `yarn install`
-    *Run the following command to confirm migrations are up to date: `yarn migrate:latest`
-    *seed the database with date using: `yarn db:seed`
-    *start server by running: `yarn dev`
+    - Run `git clone https://github.com/Sam-Shulman/t-stop-reviews.git` in your terminal.
+    - Navigate to the app in your terminal: `cd t-stop-reviews`
+    - Navigate to the server folder to complete the following commands: `cd server`
+    - Create the database using postGresSQL: `createdb t-stop-reviews_development`
+    - run yarn install in your terminal before opening the app: `yarn install`
+    - Run the following command to confirm migrations are up to date: `yarn migrate:latest`
+    - seed the database with date using: `yarn db:seed`
+    - start server by running: `yarn dev`
 
 ### Usage:
 Navigate to https://localhost:300/
