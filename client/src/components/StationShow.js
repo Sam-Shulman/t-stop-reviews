@@ -62,34 +62,44 @@ const StationShow = props => {
         }
     }
 
-    // delete endpoint is trying to call from /stations/api/v1/stations/id/reviews/id and the first /stations shouldnt be there
-
     const handleDeleteReview = async (reviewId) => {
-        const response =  await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        if(!response.ok) {
-            const errorMessage= `${response.status} (${response.statusText})`
-            throw new Error(errorMessage)
+        
+        try {
+            const response = await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}`,
+            { method: "DELETE" })
+            const filteredReviews = station.reviews.filter((review) => {
+                if(review.id !== reviewId) {
+                    return review
+                }
+            })
+            setStation({
+                ...station, 
+                reviews: filteredReviews
+            })
+        } catch (error) {
+            console.error(`Error in fetch: ${error.message}`)
         }
-        const responseBody = await response.json()
-        setStation({
-            ...station, ["reviews"]: responseBody.reviews
-        })
     }
+       
+    const reviewTiles = 
+    station.reviews.length > 0 ? (
+        station.reviews.map((review) => (
+            <ReviewTile
+            key={review.id}
+            body={review.body}
+            rating={review.rating}
+            handleDeleteReview={handleDeleteReview}
+            hasPolicePresence={review.hasPolicePresence}
+            hasSittingWater={review.hasSittingWater}
+            />
+        ))
+    ) : (
+        <p>No Reviews Here!</p>
+    )
     
     useEffect(() => {
         getStation()
     }, [])
-
-    console.log(station.reviews)
-
-    const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} stationId={stationId} handleDeleteReview={handleDeleteReview} {...reviewObject}/>
-    })
 
     let borderColor
     if (station.line.includes("Orange")) {
@@ -117,7 +127,7 @@ const StationShow = props => {
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
                 <h3>What other people are saying</h3>
-                {reviewTiles}
+                <ul>{reviewTiles}</ul>
         </>
     )   
 }

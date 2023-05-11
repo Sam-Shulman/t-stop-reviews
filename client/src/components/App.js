@@ -10,7 +10,7 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import newStationForm from "./NewStationForm";
+import newStationForm from "./newStationForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
