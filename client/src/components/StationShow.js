@@ -151,10 +151,6 @@ const StationShow = props => {
     }
     const message = "Delete this station"
 
-    const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
-    })
-
     let borderColor
     if (station.line.includes("Orange")) {
         borderColor = "orange-border"
