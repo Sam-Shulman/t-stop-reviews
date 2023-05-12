@@ -1,6 +1,7 @@
 import React from "react";
 
-const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
+const ReviewTile = ({reviewId, body, rating, hasPolicePresence, hasSittingWater, handleDeleteReview, currentUser, userId}) => {
+
     let hasPolicePresenceSection, hasSittingWaterSection
 
     if (hasPolicePresence) {
@@ -14,13 +15,23 @@ const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
     } else {
         hasSittingWaterSection = <p>There was not random sitting water!</p>
     }
+
+    const isSameUser = currentUser && currentUser.id === userId
+
+    const clickHandler = () => {
+        handleDeleteReview(reviewId)
+    }
+
     return (
         <div className="callout">
             <p>Body: {body}</p>
             <p>Rating: {rating}</p>
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
-            </div>
+        {(isSameUser) && (
+            <button type="delete" className="button" onClick={clickHandler}>Delete</button>
+        )}
+        </div>
     )
 }
 

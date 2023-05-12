@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Redirect } from "react-router-dom"
 import ReviewTile from "./ReviewTile.js"
-import NewReviewForm from "./newReviewForm.js"
+import NewReviewForm from "./NewReviewForm.js"
 import ErrorList from "./ErrorList.js"
 import translateServerErrors from "../services/translateServerErrors.js"
-
+import getCurrentUser from "../services/getCurrentUser.js"
 
 const StationShow = props => {
-
     const [station, setStation] = useState({
         name: "",
         line: "",
@@ -20,6 +19,20 @@ const StationShow = props => {
     const [shouldRedirect, setShouldRedirect] = useState(false)
 
     const stationId = props.match.params.id
+
+    const [currentUser, setCurrentUser] = useState(undefined);
+    const fetchCurrentUser = async () => {
+      try {
+        const user = await getCurrentUser()
+        setCurrentUser(user)
+      } catch(err) {
+        setCurrentUser(null)
+      }
+    }
+  
+    useEffect(() => {
+      fetchCurrentUser()
+    }, [])
 
     const getStation = async () => {
         try {
@@ -65,6 +78,43 @@ const StationShow = props => {
             console.error(`Error in fetch: ${error.message}`)
         }
     }
+
+    const handleDeleteReview = async (reviewId) => {
+        try {
+            const response = await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}`,
+            { method: "DELETE" })
+            const filteredReviews = station.reviews.filter((review) => {
+                if(review.id !== reviewId) {
+                    return review
+                }
+            })
+            setStation({
+                ...station, 
+                reviews: filteredReviews
+            })
+        } catch (error) {
+            console.error(`Error in fetch: ${error.message}`)
+        }
+    }
+       
+    const reviewTiles = 
+    station.reviews.length > 0 ? (
+        station.reviews.map((review) => (
+            <ReviewTile
+            key={review.id}
+            reviewId={review.id}
+            body={review.body}
+            rating={review.rating}
+            handleDeleteReview={handleDeleteReview}
+            hasPolicePresence={review.hasPolicePresence}
+            hasSittingWater={review.hasSittingWater}
+            currentUser={currentUser}
+            userId={review.userId}
+            />
+        ))
+    ) : (
+        <p>No Reviews Here!</p>
+    )
     
     useEffect(() => {
         getStation()
@@ -134,7 +184,7 @@ const StationShow = props => {
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
                 <h3>What other people are saying</h3>
-                {reviewTiles}
+                <ul>{reviewTiles}</ul>
         </>
     )   
 }
