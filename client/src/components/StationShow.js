@@ -151,9 +151,9 @@ const StationShow = props => {
     }
     const message = "Delete this station"
 
-    const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
-    })
+    // const reviewTiles = station.reviews.map((reviewObject)=> {
+    //     return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+    // })
 
     let borderColor
     if (station.line.includes("Orange")) {
@@ -183,7 +183,7 @@ const StationShow = props => {
             </div>
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
-                <h3>What other people are saying</h3>
+                <h3 className="what-peeps-are-saying">What other people are saying</h3>
                 <ul>{reviewTiles}</ul>
         </>
     )   
