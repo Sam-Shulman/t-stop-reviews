@@ -97,19 +97,18 @@ const StationShow = props => {
         }
     }
        
-    const reviewTiles = 
-    station.reviews.length > 0 ? (
+    const reviewTiles = station.reviews.length > 0 ? (
         station.reviews.map((review) => (
             <ReviewTile
-            key={review.id}
-            reviewId={review.id}
-            body={review.body}
-            rating={review.rating}
-            handleDeleteReview={handleDeleteReview}
-            hasPolicePresence={review.hasPolicePresence}
-            hasSittingWater={review.hasSittingWater}
-            currentUser={currentUser}
-            userId={review.userId}
+                key={review.id}
+                reviewId={review.id}
+                body={review.body}
+                rating={review.rating}
+                handleDeleteReview={handleDeleteReview}
+                hasPolicePresence={review.hasPolicePresence}
+                hasSittingWater={review.hasSittingWater}
+                currentUser={currentUser}
+                userId={review.userId}
             />
         ))
     ) : (
@@ -151,9 +150,6 @@ const StationShow = props => {
     }
     const message = "Delete this station"
 
-    // const reviewTiles = station.reviews.map((reviewObject)=> {
-    //     return <ReviewTile key={reviewObject.id} {...reviewObject}/>
-    // })
 
     let borderColor
     if (station.line.includes("Orange")) {
