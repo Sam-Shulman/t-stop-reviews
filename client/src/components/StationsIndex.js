@@ -40,7 +40,7 @@ const StationIndex = props => {
         }
 
         return (
-            <div className={`tile-border ${borderColor}`}>
+            <div key={stationItem.id} className={`tile-border ${borderColor}`}>
                 <div className="font-apply index-text-size" key={stationItem.id}>
                     <Link to={`/stations/${stationItem.id}`}>
                         <p>{stationItem.name}</p>

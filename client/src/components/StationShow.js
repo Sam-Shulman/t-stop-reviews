@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import ReviewTile from "./ReviewTile.js"
-import NewReviewForm from "./newReviewForm.js"
+import NewReviewForm from "./NewReviewForm.js"
 import ErrorList from "./ErrorList.js"
 import translateServerErrors from "../services/translateServerErrors.js"
-
+import getCurrentUser from "../services/getCurrentUser.js"
 
 const StationShow = props => {
     const [station, setStation] = useState({
@@ -16,6 +16,20 @@ const StationShow = props => {
     const [errors, setErrors] = useState([])
 
     const stationId = props.match.params.id
+
+    const [currentUser, setCurrentUser] = useState(undefined);
+    const fetchCurrentUser = async () => {
+      try {
+        const user = await getCurrentUser()
+        setCurrentUser(user)
+      } catch(err) {
+        setCurrentUser(null)
+      }
+    }
+  
+    useEffect(() => {
+      fetchCurrentUser()
+    }, [])
 
     const getStation = async () => {
         try {
@@ -63,7 +77,6 @@ const StationShow = props => {
     }
 
     const handleDeleteReview = async (reviewId) => {
-        
         try {
             const response = await fetch(`/api/v1/stations/${stationId}/reviews/${reviewId}`,
             { method: "DELETE" })
@@ -86,11 +99,14 @@ const StationShow = props => {
         station.reviews.map((review) => (
             <ReviewTile
             key={review.id}
+            reviewId={review.id}
             body={review.body}
             rating={review.rating}
             handleDeleteReview={handleDeleteReview}
             hasPolicePresence={review.hasPolicePresence}
             hasSittingWater={review.hasSittingWater}
+            currentUser={currentUser}
+            userId={review.userId}
             />
         ))
     ) : (

@@ -1,8 +1,7 @@
 import React from "react";
 
-const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSittingWater, handleDeleteReview }) => {
-    // const {id, body, rating, hasPolicePresence, hasSittingWater} = review    
-    
+const ReviewTile = ({reviewId, body, rating, hasPolicePresence, hasSittingWater, handleDeleteReview, currentUser, userId}) => {
+
     let hasPolicePresenceSection, hasSittingWaterSection
 
     if (hasPolicePresence) {
@@ -17,8 +16,10 @@ const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSitting
         hasSittingWaterSection = <p>There was not random sitting water!</p>
     }
 
+    const isSameUser = currentUser && currentUser.id === userId
+
     const clickHandler = () => {
-        handleDeleteReview(id)
+        handleDeleteReview(reviewId)
     }
 
     return (
@@ -27,9 +28,9 @@ const ReviewTile = ({ stationId, body, rating, id, hasPolicePresence, hasSitting
             <p>Rating: {rating}</p>
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
-            <div>
-                <button type="delete" onClick={clickHandler}>Delete</button>
-            </div>
+        {(isSameUser) && (
+            <button type="delete" className="button" onClick={clickHandler}>Delete</button>
+        )}
         </div>
     )
 }

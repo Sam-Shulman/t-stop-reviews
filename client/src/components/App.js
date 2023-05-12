@@ -31,13 +31,14 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={StationIndex}/>
+        <Route exact path="/" render={(props) => <StationIndex {...props} currentUser={currentUser} />}/>
         <Route exact path="/stations/new" component={newStationForm}/>
         <Redirect exact from="/" to="/stations"/>
         <Route exact path="/stations" component={StationIndex} />
         <Route exact path="/stations/:id" component={StationShow} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
+
       </Switch>
     </Router>
   );
