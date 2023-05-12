@@ -2,6 +2,10 @@
 @import "~foundation-sites/scss/foundation";
 @include foundation-everything;
 
+.vote-buttons{
+  font-size: xx-large;
+}
+
 .grid-container {
   padding-top: 100px;
   margin-top: 50px;
@@ -202,6 +206,7 @@ form .button {
   cursor: pointer;
   border-radius: 10%;
 }
+
 
 .top-sign-text {
   margin: auto;

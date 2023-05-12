@@ -1,6 +1,7 @@
 import React from "react";
+import VoteTile from "./VoteTile.js";
 
-const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
+const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater, reviewId, id}) => {
     let hasPolicePresenceSection, hasSittingWaterSection
 
     if (hasPolicePresence) {
@@ -20,6 +21,7 @@ const ReviewTile = ({ body, rating, hasPolicePresence, hasSittingWater}) => {
             <p>Rating: {rating}</p>
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
+            <VoteTile key={id} reviewId={id}/>
             </div>
     )
 }
