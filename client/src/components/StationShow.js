@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Redirect } from "react-router-dom"
 import ReviewTile from "./ReviewTile.js"
 import NewReviewForm from "./NewReviewForm.js"
 import ErrorList from "./ErrorList.js"
@@ -14,6 +15,8 @@ const StationShow = props => {
         reviews: []
     })
     const [errors, setErrors] = useState([])
+
+    const [shouldRedirect, setShouldRedirect] = useState(false)
 
     const stationId = props.match.params.id
 
@@ -117,6 +120,41 @@ const StationShow = props => {
         getStation()
     }, [])
 
+    const deleteStation = async () => {
+        try{
+            const response = await fetch(`/api/v1/stations/${stationId}`, 
+            { method: "DELETE"})
+            if(!response.ok) {
+                const errorMessage = `${response.status} (${response.statusText})`
+                const error = new Error(errorMessage)
+                throw error
+            }
+            setShouldRedirect(true)
+        } catch (err){
+            console.error(`Error in fetch: ${err.message}`)
+        }
+    }
+    const handleDelete = (event) => {
+        event.preventDefault()
+        deleteStation()
+    }
+    if (shouldRedirect){
+        return <Redirect push to="/" />
+    }
+    let isAdmin = false
+    if(props.user) {
+        isAdmin = props.user.isAdmin
+    }
+    let classHide = "hide"
+    if (isAdmin) {
+        classHide = ""
+    }
+    const message = "Delete this station"
+
+    const reviewTiles = station.reviews.map((reviewObject)=> {
+        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+    })
+
     let borderColor
     if (station.line.includes("Orange")) {
         borderColor = "orange-border"
@@ -138,6 +176,9 @@ const StationShow = props => {
                     <h3>{station.name}</h3>
                     <h3>{station.line} Line</h3>
                     <h3>{station.location}</h3>
+                </div>
+                <div className="deleteButton">
+                    <button onClick={handleDelete} className={`button ${classHide}`}>{isAdmin && message}</button>
                 </div>
             </div>
                 <ErrorList errors={errors} />

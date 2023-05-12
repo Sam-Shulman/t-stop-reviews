@@ -35,7 +35,7 @@ const App = (props) => {
         <Route exact path="/stations/new" component={newStationForm}/>
         <Redirect exact from="/" to="/stations"/>
         <Route exact path="/stations" component={StationIndex} />
-        <Route exact path="/stations/:id" component={StationShow} />
+        <Route exact path="/stations/:id" render={(props) => <StationShow {...props} user={currentUser}/>}/>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
 

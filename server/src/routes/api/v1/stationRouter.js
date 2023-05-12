@@ -55,6 +55,16 @@ stationRouter.post("/", uploadImage.single("imgUrl"), async (req, res) => {
         }
         return res.status(500).json({ errors: error });
     }
-});
+})
+
+stationRouter.delete("/:id", async (req, res) => {
+    const { id } = req.params
+    try{
+        await Station.query().deleteById(id)
+        return res.status(200).json({message: "Station successfully deleted"})
+    } catch (err) {
+        return res.status(500).json({ errors: err})
+    }
+})
 
 export default stationRouter
