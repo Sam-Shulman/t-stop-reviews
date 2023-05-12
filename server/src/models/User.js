@@ -55,7 +55,7 @@ class User extends uniqueFunc(Model) {
           to: "reviews.userId"
         }
       },
-      movies: {
+      station: {
         relation: Model.ManyToManyRelation,
         modelClass: Station,
         join: {
@@ -63,7 +63,8 @@ class User extends uniqueFunc(Model) {
           through: {
             from: "reviews.userId",
             to: "reviews.stationId"
-        }
+        },
+        to: "station.id"
       },
     },
     votes: {

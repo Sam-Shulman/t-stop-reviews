@@ -27,6 +27,7 @@ const StationShow = props => {
                 throw error
               }
             const body = await response.json()
+            console.log(body)
             setStation(body.station)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
@@ -68,7 +69,8 @@ const StationShow = props => {
     }, [])
 
     const reviewTiles = station.reviews.map((reviewObject)=> {
-        return <ReviewTile key={reviewObject.id} {...reviewObject}/>
+        console.log(reviewObject)
+        return <ReviewTile key={reviewObject.id} stationId={stationId} {...reviewObject}/>
     })
 
     let borderColor

@@ -15,11 +15,12 @@ stationRouter.get("/", async (req, res) => {
         const stations = await Station.query()
         const serializedStations = await Promise.all(
             stations.map(async (station) => {
-              return await StationSerializer.getSummary(station)
+              return await StationSerializer.getIndexSummary(station)
             })
           )
         return res.status(200).json({ stations: serializedStations })
     } catch (err) {
+        console.log(err)
         return res.status(500).json({ errors: err })
     }
 })
@@ -31,7 +32,9 @@ stationRouter.get("/:id", async (req, res) => {
         const serializedStation = await StationSerializer.getSummary(showStation, req.user)
         return res.status(200).json({ station: serializedStation })
     } catch (err) {
+        console.log(err)
         return res.status(500).json({ errors: err })
+        
     }
 })
 
