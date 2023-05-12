@@ -150,6 +150,7 @@ const StationShow = props => {
     }
     const message = "Delete this station"
 
+
     let borderColor
     if (station.line.includes("Orange")) {
         borderColor = "orange-border"
@@ -178,7 +179,7 @@ const StationShow = props => {
             </div>
                 <ErrorList errors={errors} />
                 <NewReviewForm postReview={postReview} />
-                <h3>What other people are saying</h3>
+                <h3 className="what-peeps-are-saying">What other people are saying</h3>
                 <ul>{reviewTiles}</ul>
         </>
     )   

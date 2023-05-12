@@ -24,7 +24,7 @@ const ReviewTile = ({reviewId, body, rating, hasPolicePresence, hasSittingWater,
 
     return (
         <div className="callout">
-            <p>Body: {body}</p>
+            <p>{body}</p>
             <p>Rating: {rating}</p>
             {hasPolicePresenceSection}
             {hasSittingWaterSection}
