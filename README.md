@@ -11,7 +11,7 @@ https://localhost3000
     - JavaScript
     - Express
     - React
-    - Foundations CSS
+    - Foundation CSS
     - PostgreSQL
 
 ### Installation
