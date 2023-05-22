@@ -25,9 +25,7 @@ https://localhost3000
     - start server by running: `yarn dev`
 
 ### Usage:
-Navigate to https://localhost:300/
-
-Add an image of our index page
+Navigate to https://localhost:3000/
 
 
 
